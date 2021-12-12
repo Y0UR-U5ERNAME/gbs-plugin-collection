@@ -1,4 +1,4 @@
-# GB Studio Plugin Colleciton
+# GB Studio Plugin Collection
 A collection of GB Studio 3.0 plugins made by Yousurname. Not to be confused with [Pautomas's Plugin Pak](https://github.com/pau-tomas/gb-studio-plugins).
 
 ## Transfer SGB Packet Plugin
