@@ -143,6 +143,12 @@ export const fields = [].concat(
         min: 1,
         max: 18,
         defaultValue: 3,
+        conditions: [
+          {
+            key: "orientation",
+            eq: "left",
+          },
+        ]
       },
       {
         key: "orientation",
@@ -172,11 +178,14 @@ export const compile = (input, helpers) => {
     }
   } else {
     input.text.forEach((e, i) => {
-      input.text[i] += "\n".repeat(Math.max((input.largeAvatar.match(/\n/g) || []).length - (e.match(/\n/g) || []).length, 0))
+      input.text[i] += "\n".repeat(Math.max((input.largeAvatar.match(/\n/g) || []).length - (e.match(/\n/g) || []).length, 0));
     });
+    [...input.largeAvatar.matchAll(/\n/g)].forEach((e, i) => {
+      input.largeAvatar = input.largeAvatar.replace('\n', `\\003\\${oct(input.avatarX)}\\${oct(input.avatarY + i + 1)}`)
+    })
     for (i = 0; i <= 5; i++) {
       ifVariableValue("T2", ".EQ", 2 ** i - 1, () => {
-        textDialogue(input.text.map(e => `\\001\\001\\003\\${oct(input.nameX)}\\001${input.nameTag}\\003\\${oct(input.avatarX)}\\${oct(input.avatarY)}${input.largeAvatar.replace(/\n/g, `\\004\\${oct(-input.avatarWidth + 1)}\\002`)}\\003\\${oct(input.avatarWidth + input.avatarX)}\\002\\002\\001\\001\\${oct(i + 1)}${e || " "}`));
+        textDialogue(input.text.map(e => `\\001\\001\\003\\${oct(input.nameX)}\\001${input.nameTag}\\003\\${oct(input.avatarX)}\\${oct(input.avatarY)}${input.largeAvatar}\\003\\${oct(input.orientation == "left" ? input.avatarWidth + input.avatarX : 2)}\\002\\002\\001\\001\\${oct(i + 1)}${e || " "}`));
       }, []);
     }
   }
