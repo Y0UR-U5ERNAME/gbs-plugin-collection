@@ -3,4 +3,4 @@ A collection of GB Studio 3.0 plugins made by Yousurname. Not to be confused wit
 
 ## Transfer SGB Packet Plugin
 Transfers SGB packets for accessing SGB features. It currently only supports applying a palette to a rectangular area. [Old Repository](https://github.com/Y0UR-U5ERNAME/GB-Studio-Transfer-SGB-Packet-Plugin)
-![]()
+![](/screenshots/sgb_packet_plugin.png)
