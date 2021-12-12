@@ -10,3 +10,4 @@ Transfers SGB packets for accessing SGB features. It currently only supports app
 Allows a dialogue to have a name tag and/or a large avatar made of text.
 
 ![](/screenshots/dialogue_ntla_plugin.png)
+![](/screenshots/dialogue_ntla_plugin2.png)
