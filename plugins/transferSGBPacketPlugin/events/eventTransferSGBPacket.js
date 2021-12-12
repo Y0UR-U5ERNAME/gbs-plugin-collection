@@ -1,6 +1,6 @@
 export const id = "TRANSFER_SGB_PACKET";
 export const name = "Transfer SGB Packet";
-export const groups = ["Plugins"];
+export const groups = ["EVENT_GROUP_COLOR"];
 
 export const fields = [
   {
