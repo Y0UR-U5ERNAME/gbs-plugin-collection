@@ -16,8 +16,12 @@ Allows a dialogue to have a name tag and/or a large avatar made of text.
 ## Actor Set Collision Box Plugin
 Sets the collision box of an actor without having to change spritesheets.
 
+<img width=500 src="/screenshots/actor_collision_plugin.png">
+
 ## Change Scene With No Fade (Glitchy) Plugin
 Changes the scene without fading, causing glitchy effects usually.
+
+<img width=500 src="/screenshots/no_fade_plugin.png">
 
 ## Installation
 Add the `plugins` folder into your project.
