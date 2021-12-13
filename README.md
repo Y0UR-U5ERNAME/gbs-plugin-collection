@@ -14,12 +14,12 @@ Allows a dialogue to have a name tag and/or a large avatar made of text.
 ![](/screenshots/dialogue_ntla_plugin2.png)
 
 ## Actor Set Collision Box Plugin
-Sets the collision box of an actor without having to change spritesheets.
+Sets the collision box of an actor without having to change spritesheets. Make sure to check "Top Down 2D Scene Mode" if you are using a Top Down 2D scene.
 
 <img width=500 src="/screenshots/actor_collision_plugin.png">
 
 ## Change Scene With No Fade (Glitchy) Plugin
-Changes the scene without fading, causing glitchy effects usually.
+Changes the scene without fading, causing glitchy effects usually. Note that this will not load the Background and Sprite Palettes from the selected scene automatically.
 
 <img width=500 src="/screenshots/no_fade_plugin.png">
 
