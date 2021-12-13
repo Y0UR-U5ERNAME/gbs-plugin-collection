@@ -10,7 +10,14 @@ Transfers SGB packets for accessing SGB features. It currently only supports app
 Allows a dialogue to have a name tag and/or a large avatar made of text.
 
 ![](/screenshots/dialogue_ntla_plugin.png)
+
 ![](/screenshots/dialogue_ntla_plugin2.png)
+
+## Actor Set Collision Box Plugin
+Sets the collision box of an actor without having to change spritesheets.
+
+## Change Scene With No Fade (Glitchy) Plugin
+Changes the scene without fading, causing glitchy effects usually.
 
 ## Installation
 Add the `plugins` folder into your project.
