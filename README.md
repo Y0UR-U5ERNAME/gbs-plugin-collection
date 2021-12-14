@@ -23,5 +23,10 @@ Changes the scene without fading, causing glitchy effects usually. Note that thi
 
 <img width=500 src="/screenshots/no_fade_plugin.png">
 
+## While Loop Plugin
+Runs the following code as long as the condition is true.
+
+<img width=500 src="/screenshots/while_loop_plugin.png">
+
 ## Installation
 Add the `plugins` folder into your project.
