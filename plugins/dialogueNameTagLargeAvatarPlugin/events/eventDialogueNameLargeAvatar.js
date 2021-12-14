@@ -95,7 +95,7 @@ export const fields = [].concat(
       {
         key: "largeAvatar",
         type: "textarea",
-        placeholder: "Text...",
+        placeholder: "Avatar",
         defaultValue: "",
         flexBasis: "100%",
         conditions: [
@@ -182,13 +182,15 @@ export const compile = (input, helpers) => {
     });
     [...input.largeAvatar.matchAll(/\n/g)].forEach((e, i) => {
       input.largeAvatar = input.largeAvatar.replace('\n', `\\003\\${oct(input.avatarX)}\\${oct(input.avatarY + i + 1)}`)
-    })
+    });
+    input.text[0] = "\\002\\001" + input.text[0]
+    
     for (i = 0; i <= 5; i++) {
       ifVariableValue("T2", ".EQ", 2 ** i - 1, () => {
-        textDialogue(input.text.map(e => `\\001\\001\\003\\${oct(input.nameX)}\\001${input.nameTag}\\003\\${oct(input.avatarX)}\\${oct(input.avatarY)}${input.largeAvatar}\\003\\${oct(input.orientation == "left" ? input.avatarWidth + input.avatarX : 2)}\\002\\002\\001\\001\\${oct(i + 1)}${e || " "}`));
+        textDialogue(input.text.map(e => `\\001\\001\\003\\${oct(input.nameX)}\\001${input.nameTag}\\003\\${oct(input.avatarX)}\\${oct(input.avatarY)}\\002\\001${input.largeAvatar}\\003\\${oct(input.orientation == "left" ? input.avatarWidth + input.avatarX : 2)}\\002\\001\\${oct(i + 1)}${e || " "}`));
       }, []);
     }
   }
 };
 
-oct = num => ((256 + (num % 256)) % 256).toString(8).padStart(3, "0");
+const oct = num => ((256 + (num % 256)) % 256).toString(8).padStart(3, "0");
