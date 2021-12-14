@@ -7,14 +7,14 @@ Transfers SGB packets for accessing SGB features. It currently only supports app
 ![](/screenshots/sgb_packet_plugin.png)
 
 ## Dialogue With Name Tag/Large Avatar Plugin
-Allows a dialogue to have a name tag and/or a large avatar made of text.
+Allows a dialogue to have a name tag and/or a large avatar made of text. Note: All fonts that you use for the name tag or large avatar will have to be used in a different dialogue.
 
 ![](/screenshots/dialogue_ntla_plugin.png)
 
 ![](/screenshots/dialogue_ntla_plugin2.png)
 
 ## Actor Set Collision Box Plugin
-Sets the collision box of an actor without having to change spritesheets. Make sure to check "Top Down 2D Scene Mode" if you are using a Top Down 2D scene.
+Sets the collision box of an actor without having to change spritesheets.
 
 <img width=500 src="/screenshots/actor_collision_plugin.png">
 
