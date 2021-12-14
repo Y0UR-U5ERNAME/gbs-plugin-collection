@@ -11,13 +11,6 @@ export const fields = [
     width: "100%",
   },
   {
-    key: "topDown",
-    label: "Top Down 2D Scene Mode",
-    type: "checkbox",
-    defaultValue: false,
-    width: "100%",
-  },
-  {
     type: "group",
     fields: [
       {
@@ -61,10 +54,10 @@ export const fields = [
 ];
 
 export const compile = (input, helpers) => {
-  const { actorSetActive, actorSetBounds } = helpers;
-  const {actorId, topDown, x, y, width, height} = input;
+  const { actorSetActive, actorSetBounds, scene } = helpers;
+  const {actorId, x, y, width, height} = input;
   actorSetActive(actorId);
-  if (topDown) {
+  if (scene.type === "TOPDOWN") {
     actorSetBounds(x, width - 8, y - height + 8, y);
   } else {
     actorSetBounds(x, width, y - height + 8, y + 8);
