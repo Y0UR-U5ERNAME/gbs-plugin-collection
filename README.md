@@ -23,7 +23,7 @@ Changes the scene without fading, causing glitchy effects usually. Note that thi
 
 <img width=500 src="/screenshots/no_fade_plugin.png">
 
-## Set Master Volume Plugin
+## While Loop Plugin
 Runs the following code as long as the condition is true.
 
 <img width=500 src="/screenshots/while_loop_plugin.png">
@@ -33,7 +33,7 @@ Includes Square Root, Sine Scale, and Cosine Scale.
 
 <img width=500 src="/screenshots/advanced_math_plugin.png">
 
-## While Loop Plugin
+## Set Master Volume Plugin
 Sets the master volume, affecting all music and sounds. Setting to 0 will not mute them.
 
 <img width=500 src="/screenshots/master_volume_plugin.png">
