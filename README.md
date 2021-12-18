@@ -38,5 +38,10 @@ Sets the master volume, affecting all music and sounds. Setting to 0 will not mu
 
 <img width=500 src="/screenshots/master_volume_plugin.png">
 
+## If Running On Device Plugin
+Checks if the game is running on a certain device: Super Game Boy, Game Boy Color/Game Boy Advance, and Game Boy Advance.
+
+<img width=500 src="/screenshots/if_device_plugin.png">
+
 ## Installation
 Add the `plugins` folder into your project.
