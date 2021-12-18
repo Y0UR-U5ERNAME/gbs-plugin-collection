@@ -61,9 +61,9 @@ export const compile = (input, helpers) => {
   const {vectorX, operation, scale} = input;
   
   if (scale.type === "number") {
-    variableSetToValue("T2", scale.value)
+    variableSetToValue("T2", scale.value);
   } else {
-    variableSetToUnionValue("T2", scale)
+    variableSetToUnionValue("T2", scale);
   }
   if (operation === "sqrt") {
     _rpn()
