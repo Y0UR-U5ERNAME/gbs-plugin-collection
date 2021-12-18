@@ -23,5 +23,5 @@ export const compile = (input, helpers) => {
   const { _addCmd } = helpers;
   const {volume} = input;
   
-  _addCmd("VM_SOUND_MASTERVOL", volume)
+  _addCmd("VM_SOUND_MASTERVOL", volume);
 };
