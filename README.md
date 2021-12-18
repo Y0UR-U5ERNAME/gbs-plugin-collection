@@ -28,5 +28,15 @@ Runs the following code as long as the condition is true.
 
 <img width=500 src="/screenshots/while_loop_plugin.png">
 
+## Advanced Math Functions Plugin
+Includes Square Root, Sine Scale, and Cosine Scale.
+
+<img width=500 src="/screenshots/advanced_math_plugin.png">
+
+## While Loop Plugin
+Sets the master volume, affecting all music and sounds. Setting to 0 will not mute them.
+
+<img width=500 src="/screenshots/master_volume_plugin.png">
+
 ## Installation
 Add the `plugins` folder into your project.
