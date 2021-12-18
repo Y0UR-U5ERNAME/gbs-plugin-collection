@@ -26,7 +26,7 @@ export const fields = [
 ];
 
 export const compile = (input, helpers) => {
-  const { _addComment, _compilePath, _stackPushEvaluatedExpression, _ifConst, getNextLabel, _jump, _label } = helpers;
+  const { _addComment, _compilePath, _stackPushEvaluatedExpression, _ifConst, getNextLabel, _jump, _label, _addCmd } = helpers;
   const {expression, events} = input;
 
   const startLabel = getNextLabel();
@@ -39,6 +39,7 @@ export const compile = (input, helpers) => {
   _jump(endLabel);
   _label(contLabel);
   _compilePath(events);
+  _addCmd("VM_IDLE");
   _jump(startLabel);
   _label(endLabel);
 };
