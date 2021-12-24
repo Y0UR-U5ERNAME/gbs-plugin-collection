@@ -60,7 +60,7 @@ export const compile = (input, helpers) => {
   if (scene.type === "TOPDOWN") {
     actorSetBounds(x, width - 8, y - height + 8, y);
   } else {
-    actorSetBounds(x, width, y - height + 8, y + 8);
+    actorSetBounds(x, width - 1, y - height + 8, y + 7);
   }
 };
 
