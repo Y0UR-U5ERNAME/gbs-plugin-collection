@@ -43,5 +43,15 @@ Checks if the game is running on a certain device: Super Game Boy, Game Boy Colo
 
 <img width=500 src="/screenshots/if_device_plugin.png">
 
+## Store System Time in Variable Plugin
+Stores the system time (the number of frames since game started running) inside a variable.
+
+<img width=500 src="/screenshots/get_systime_plugin.png">
+
+## Set Music Position Plugin
+Sets the music position (you can currently only set the pattern number).
+
+<img width=500 src="/screenshots/set_music_pos_plugin.png">
+
 ## Installation
 Add the `plugins` folder into your project.
