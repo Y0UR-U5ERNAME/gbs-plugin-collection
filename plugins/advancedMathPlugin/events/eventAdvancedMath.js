@@ -32,7 +32,6 @@ export const fields = [
   },
   {
     key: "scale",
-    type: "union",
     label: "Scale",
     type: "union",
     types: ["number", "variable", "property"],
