@@ -21,35 +21,63 @@ const gbcColor = i => {
     ].concat(i === 3 ? [{key: "type", eq: "Bkg",}] : []),
     fields: [
       {
+        key: `cc${i}`,
+        type: "checkbox",
         label: `Color ${i + 1}`,
+        alignCheckbox: true,
+        defaultValue: true,
         width: "50%",
       },
       {
         type: "group",
+        conditions: [
+          {
+            key: `cc${i}`,
+            eq: true,
+          },
+        ],
         fields: [
           {
             key: `r${i}`,
             label: "R",
-            type: "number",
+            type: "union",
+            types: ["number", "variable", "property"],
+            defaultType: "number",
             min: 0,
             max: 31,
-            defaultValue: [29, 22, 10, 4][i],
+            defaultValue: {
+              number: [29, 22, 10, 4][i],
+              variable: "LAST_VARIABLE",
+              property: "$self$:xpos",
+            },
           },
           {
             key: `g${i}`,
             label: "G",
-            type: "number",
+            type: "union",
+            types: ["number", "variable", "property"],
+            defaultType: "number",
             min: 0,
             max: 31,
-            defaultValue: [31, 30, 19, 5][i],
+            defaultValue: {
+              number: [31, 30, 19, 5][i],
+              variable: "LAST_VARIABLE",
+              property: "$self$:xpos",
+            },
           },
           {
             key: `b${i}`,
             label: "B",
-            type: "number",
+            type: "union",
+            types: ["number", "variable", "property"],
+            defaultType: "number",
             min: 0,
             max: 31,
-            defaultValue: [28, 17, 15, 10][i],
+            defaultValue: {
+              number: [28, 17, 15, 10][i],
+              variable: "LAST_VARIABLE",
+              property: "$self$:xpos",
+            },
           },
         ]
       },
@@ -212,8 +240,8 @@ export const fields = [
 ];
 
 export const compile = (input, helpers) => {
-  const { _addCmd, variableFromUnion, _rpn, _stackPop, getVariableAlias } = helpers
-  const {sys, pal, c0, c1, c2, c3, type, cpal, r0, g0, b0, r1, g1, b1, r2, g2, b2, r3, g3, b3} = input;
+  const { _addCmd, variableFromUnion, _rpn, _stackPop, getVariableAlias, _setConst, appendRaw, getNextLabel, variableSetToUnionValue } = helpers
+  const {sys, pal, c0, c1, c2, c3, type, cpal} = input;
 
   if (sys === "dmg") {
     if ([c0, c1, c2, pal === "BGP" ? c3 : c2].every(e => e.type === "number")) {
@@ -257,11 +285,60 @@ export const compile = (input, helpers) => {
       _stackPop(1);
     }
   } else {
-    _addCmd("VM_LOAD_PALETTE", 2 ** (cpal - 1), `^/(.PALETTE_${type === "Bkg" ? "BKG" : "SPRITE"} | .PALETTE_COMMIT)/`);
-    if (type === "Bkg") {
-      _addCmd(".CGB_PAL", r0, g0, b0, r1, g1, b1, r2, g2, b2, r3, g3, b3);
-    } else {
-      _addCmd(".CGB_PAL", 0, 0, 0, r0, g0, b0, r1, g1, b1, r2, g2, b2);
+    let R, G, B;
+    const l1 = getNextLabel();
+    const l2 = getNextLabel();
+    const bank = ".CURRENT_SCRIPT_BANK";
+    
+    for (var i = 0; i < (type === "Bkg" ? 4 : 3); i++) {
+      if (input[`cc${i}`]) {
+        if (["r", "g", "b"].every(e => input[e + i].type === "number")) {
+          _setConst(getVariableAlias("T0"), ((input[`r${i}`].value) & 0x1f) | (((input[`g${i}`].value) & 0x1f) << 5) | (((input[`b${i}`].value) & 0x1f) << 10));
+        } else {
+          variableSetToUnionValue("T0", input[`r${i}`])
+          variableSetToUnionValue("T1", input[`g${i}`])
+          variableSetToUnionValue("T2", input[`b${i}`])
+          R = getVariableAlias("T0");
+          G = getVariableAlias("T1");
+          B = getVariableAlias("T2");
+          _rpn()
+            .ref(R).int16(0x1f).operator(".B_AND")                              // ((R) & 0x1f)
+            .ref(G).int16(0x1f).operator(".B_AND").int16(32).operator(".MUL")   // (((G) & 0x1f) << 5)
+            .operator(".B_OR")
+            .ref(B).int16(0x1f).operator(".B_AND").int16(1024).operator(".MUL") // (((B) & 0x1f) << 10)
+            .operator(".B_OR")
+            .stop();
+          _addCmd("VM_SET", R, ".ARG0");
+          _stackPop(1);
+        }
+        _setConst(getVariableAlias("T1"), i);
+        _setConst(getVariableAlias("T2"), cpal - 1);
+        _addCmd("VM_CALL_NATIVE", bank, `${l1}$`);
+      }
     }
+    _addCmd("VM_JUMP", `${l2}$`);
+
+    // from https://discord.com/channels/554713715442712616/925672652339810335/931581094556499978
+    appendRaw(
+      `
+      ${l1}$:
+      ld hl, #(_script_memory + (${getVariableAlias("T0")} << 1)) 
+      ld a, (hl+)
+      ld h, (hl)
+      ld l, a
+      push hl
+
+      ld a, (_script_memory + (${getVariableAlias("T1")} << 1)) 
+      ld h, a
+      ld a, (_script_memory + (${getVariableAlias("T2")} << 1)) 
+      ld l, a
+      push hl
+
+      call _set_${type === "Bkg" ? "bkg" : "sprite"}_palette_entry
+      add sp, #4
+      ret
+      ${l2}$:
+      `
+    );
   }
 };
