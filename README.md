@@ -49,7 +49,7 @@ Sets the music position (you can currently only set the pattern number).
 <img width=500 src="/screenshots/set_music_pos_plugin.png">
 
 ## Set Palette Colors Plugin
-Sets each of the individual colors of either the DMG or GBC palettes.
+Sets each of the individual colors of either the DMG or GBC palettes. The current version only works with v3.0.3. Use previous versions without setting GBC palettes to variables for greater compatibility.
 
 <img width=500 src="/screenshots/set_palette_colors_plugin.png">
 
