@@ -24,7 +24,7 @@ Changes the scene without fading, causing glitchy effects usually. Note that thi
 <img width=500 src="/screenshots/no_fade_plugin.png">
 
 ## While Loop Plugin
-Runs the following code as long as the condition is true.
+Runs the following code as long as the condition is true. There is a built-in event for this in 3.1, but this will stay here for archival purposes.
 
 <img width=500 src="/screenshots/while_loop_plugin.png">
 
@@ -48,7 +48,7 @@ Sets the music position (you can currently only set the pattern number).
 
 <img width=500 src="/screenshots/set_music_pos_plugin.png">
 
-## Set Palette Colors Plugin
+## Set Palette Colors Plugin (not updated for 3.1 yet)
 Sets each of the individual colors of either the DMG or GBC palettes. The current version only works with v3.0.3. Use previous versions without setting GBC palettes to variables for greater compatibility.
 
 <img width=500 src="/screenshots/set_palette_colors_plugin.png">
