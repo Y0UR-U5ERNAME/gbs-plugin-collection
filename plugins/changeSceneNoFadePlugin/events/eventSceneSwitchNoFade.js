@@ -44,24 +44,24 @@ export const fields = [
 ];
 
 export const compile = (input, helpers) => {
-  const { _addComment, options, _setConst, _actorSetPosition, _actorSetDirection, _raiseException, _importFarPtrData, _addNL } = helpers;
+  const { _addComment, options, _setConst, _actorSetPosition, _actorSetDirection, _raiseException, _importFarPtrData, _addNL, _declareLocal, _localRef } = helpers;
   
   //copied from ScriptBuilder.ts but without _fadeOut
-  helpers.includeActor = true;
+  const actorRef = _declareLocal("actor", 4);
   _addComment("Load Scene With No Fade");
   const { scenes } = options;
-  const sceneIndex = scenes.findIndex((s) => s.id === input.sceneId);
-  if (sceneIndex > -1) {
-    _setConst("ACTOR", 0);
-    _setConst("^/(ACTOR + 1)/", input.x * 8 * 16);
-    _setConst("^/(ACTOR + 2)/", input.y * 8 * 16);
-    _actorSetPosition("ACTOR");
+  const scene = scenes.find((s) => s.id === input.sceneId);
+  if (scene) {
+    _setConst(actorRef, 0);
+    _setConst(_localRef(actorRef, 1), input.x * 8 * 16);
+    _setConst(_localRef(actorRef, 2), input.y * 8 * 16);
+    _actorSetPosition(actorRef);
     const asmDir = toASMDir(input.direction);
     if (asmDir) {
-      _actorSetDirection("ACTOR", asmDir);
+      _actorSetDirection(actorRef, asmDir);
     }
     _raiseException("EXCEPTION_CHANGE_SCENE", 3);
-    _importFarPtrData(`scene_${sceneIndex}`);
+    _importFarPtrData(scene.symbol);
     _addNL();
   }
 };
