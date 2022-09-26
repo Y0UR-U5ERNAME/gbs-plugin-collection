@@ -3,16 +3,25 @@ export const name = "Set Master Volume";
 export const groups = ["EVENT_GROUP_MUSIC"];
 
 export const autoLabel = (fetchArg, args) => {
-  return "Set Master Volume To " + fetchArg("volume")
+  return "Set Master Volume To L" + fetchArg("l")+" R"+fetchArg("r")
 };
 
 export const fields = [
   {
-    key: "volume",
+    key: "l",
+    label: "Left Volume",
     type: "slider",
     min: 0,
-    max: 39,
-    defaultValue: 0,
+    max: 7,
+    defaultValue: 7,
+  },
+  {
+    key: "r",
+    label: "Right Volume",
+    type: "slider",
+    min: 0,
+    max: 7,
+    defaultValue: 7,
   },
   {
     label: "Note that setting the volume to 0 will not mute the volume.",
@@ -21,7 +30,7 @@ export const fields = [
 
 export const compile = (input, helpers) => {
   const { _addCmd } = helpers;
-  const {volume} = input;
+  const {l, r} = input;
   
-  _addCmd("VM_SOUND_MASTERVOL", volume);
+  _addCmd("VM_SOUND_MASTERVOL", r*16 + l)
 };
