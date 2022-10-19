@@ -4,12 +4,13 @@ export const groups = ["EVENT_GROUP_MATH"];
 
 export const autoLabel = (fetchArg, args) => {
   const x = fetchArg("vectorX");
+  const y = fetchArg("vectorY");
   if (fetchArg("operation") === "sqrt") {
       return `${x} = sqrt(${x})`;
   } else if (fetchArg("operation") === "sins") {
-      return `${x} = sin(${x}) * ${fetchArg("scale")}`;
+      return `${x} = sin(${y}) * ${x}`;
   } else if (fetchArg("operation") === "coss") {
-      return `${x} = cos(${x}) * ${fetchArg("scale")}`;
+      return `${x} = cos(${y}) * ${x}`;
   }
 };
 
@@ -31,18 +32,23 @@ export const fields = [
     width: "50%",
   },
   {
+    key: "vectorY",
+    type: "variable",
+    defaultValue: "LAST_VARIABLE",
+    conditions: [
+      {
+        key: "operation",
+        ne: "sqrt",
+      },
+    ],
+  },
+  {
     key: "scale",
-    label: "Scale",
-    type: "union",
-    types: ["number", "variable", "property"],
-    defaultType: "number",
+    label: "Accuracy",
+    type: "number",
     min: 0,
-    max: 255,
-    defaultValue: {
-      number: 100,
-      variable: "LAST_VARIABLE",
-      property: "$self$:xpos",
-    },
+    max: 7,
+    defaultValue: 7,
     conditions: [
       {
         key: "operation",
@@ -56,24 +62,18 @@ export const fields = [
 ];
 
 export const compile = (input, helpers) => {
-  const { _rpn, _addCmd, _setVariable, variableSetToUnionValue, getVariableAlias, variableSetToValue } = helpers;
-  const {vectorX, operation, scale} = input;
+  const { _rpn, _addCmd, _setVariable, getVariableAlias } = helpers;
+  const {vectorX, vectorY, operation, scale} = input;
   
-  if (scale.type === "number") {
-    variableSetToValue("T2", scale.value);
-  } else {
-    variableSetToUnionValue("T2", scale);
-  }
   if (operation === "sqrt") {
     _rpn()
       .refVariable(vectorX)
       .operator(".ISQRT")
       .stop();
+    _setVariable(vectorX, ".ARG0");
   } else if (operation === "sins") {
-    _addCmd("VM_SIN_SCALE", getVariableAlias("T2"), getVariableAlias(vectorX), 7);
+    _addCmd("VM_SIN_SCALE", getVariableAlias(vectorX), getVariableAlias(vectorY), scale);
   } else if (operation === "coss") {
-    _addCmd("VM_COS_SCALE", getVariableAlias("T2"), getVariableAlias(vectorX), 7);
+    _addCmd("VM_COS_SCALE", getVariableAlias(vectorX), getVariableAlias(vectorY), scale);
   }
-
-  _setVariable(vectorX, getVariableAlias("T2"));
 };
