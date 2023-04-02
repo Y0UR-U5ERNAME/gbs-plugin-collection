@@ -57,11 +57,7 @@ export const compile = (input, helpers) => {
   const { actorSetActive, actorSetBounds, scene } = helpers;
   const {actorId, x, y, width, height} = input;
   actorSetActive(actorId);
-  if (scene.type === "TOPDOWN") {
-    actorSetBounds(x, width - 8, y - height + 8, y);
-  } else {
-    actorSetBounds(x, width - 1, y - height + 8, y + 7);
-  }
+  actorSetBounds(x, x + width - 1, y - 16, y - 16 + height - 1);
 };
 
-export const allowBeforeInitFade = true;
+export const waitUntilAfterInitFade = false;
