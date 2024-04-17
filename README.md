@@ -48,10 +48,15 @@ Sets the music position (you can currently only set the pattern number).
 
 <img width=500 src="/screenshots/set_music_pos_plugin.png">
 
-## Set Palette Colors Plugin (not updated for 3.1 yet for GBC)
+## Set Palette Colors Plugin (not updated for 3.1+ yet for GBC)
 Sets each of the individual colors of either the DMG or GBC palettes. For GBC palettes: The current version only works with v3.0.3. Use previous versions without setting GBC palettes to variables for greater compatibility.
 
 <img width=500 src="/screenshots/set_palette_colors_plugin.png">
+
+## Scene Movement Plugin
+This is a menu plugin, which means that unlike most, if not all, other released GB Studio plugins, this will not add any events but will instead add new options to the menu on the top. In particular, this will help with locking scenes to a grid and moving them in various ways through selecting options in the menu or keyboard shortcuts.
+
+<img width=500 src="/screenshots/scene_movement_plugin.png">
 
 ## Installation
 Add the `plugins` folder into your project.
