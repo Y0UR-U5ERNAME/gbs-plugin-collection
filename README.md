@@ -19,7 +19,7 @@ Sets the collision box of an actor without having to change spritesheets. There 
 <img width=500 src="/screenshots/actor_collision_plugin.png">
 
 ## Change Scene With No Fade (Glitchy) Plugin
-Changes the scene without fading, causing glitchy effects usually. Note that this will not load the Background and Sprite Palettes from the selected scene automatically, and the background will appear all black on DMG.
+Changes the scene without fading, causing glitchy effects usually. Note that this will not load the Background and Sprite Palettes from the selected scene automatically, and the background will appear all black on DMG. 4.0 now supports changing scenes instantly, but this will stay here for archival purposes.
 
 <img width=500 src="/screenshots/no_fade_plugin.png">
 
