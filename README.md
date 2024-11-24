@@ -14,7 +14,7 @@ Allows a dialogue to have a name tag and/or a large avatar made of text. Note: A
 ![](/screenshots/dialogue_ntla_plugin2.png)
 
 ## Actor Set Collision Box Plugin
-Sets the collision box of an actor without having to change spritesheets.
+Sets the collision box of an actor without having to change spritesheets. There is a built-in event for this as of 4.1, but this will stay here for archival purposes.
 
 <img width=500 src="/screenshots/actor_collision_plugin.png">
 
